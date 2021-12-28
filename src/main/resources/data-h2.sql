@@ -1,0 +1,1 @@
+INSERT INTO webinfo (id, name) VALUES (1, 'https://www.wp.pl/');
