@@ -18,7 +18,7 @@ List of webs from database
 <table>
   <c:forEach items="${allWebinfo}" var="item">
     <tr>
-      <td><li>${item.getName()} <a href="/webinfolist/${item.getId()}">Get Page Source</a></li></td>
+      <td><li>${item.getName()} <a href="/webinfolist/${item.getId()}" download="${item.getName()}.html">Get Page Source</a></li></td>
     </tr>
   </c:forEach>
 </table>
