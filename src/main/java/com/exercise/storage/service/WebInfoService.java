@@ -1,5 +1,6 @@
 package com.exercise.storage.service;
 
+import com.exercise.storage.exceptions.WebInfoNotFoundException;
 import com.exercise.storage.model.persistent.DbWebInfo;
 import org.springframework.core.io.InputStreamResource;
 
@@ -9,6 +10,6 @@ import java.util.List;
 public interface WebInfoService {
     void saveWebInfo(String name);
     List<DbWebInfo> getWebInfoList();
-    DbWebInfo findWebInfo(String id);
+    DbWebInfo findWebInfo(String id) throws WebInfoNotFoundException;
     InputStreamResource collectResource(DbWebInfo webInfo) throws IOException;
 }
