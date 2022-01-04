@@ -5,7 +5,6 @@ import lombok.Data;
 
 import java.io.Serializable;
 
-
 @Data
 @Builder
 public class WebInfoDto implements Serializable {

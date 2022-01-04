@@ -1,6 +1,5 @@
 package com.exercise.storage.service;
 
-import com.exercise.storage.model.dto.WebInfoDto;
 import com.exercise.storage.model.persistent.DbWebInfo;
 import com.exercise.storage.repository.WebInfoRepository;
 import lombok.RequiredArgsConstructor;
@@ -24,10 +23,11 @@ public class WebInfoServiceImpl implements WebInfoService {
 
     @Override
     public void saveWebInfo(String source) {
-        DbWebInfo dbWebInfo = new DbWebInfo();
-        dbWebInfo.setUrl(source);
-        String[] split = source.split("\\.");
-        dbWebInfo.setName(split[1]);
+        String[] splitWebInfoName = source.split("\\.");
+        DbWebInfo dbWebInfo = DbWebInfo.builder()
+                .name(splitWebInfoName[1])
+                .url(source)
+                .build();
         webInfoRepository.save(dbWebInfo);
     }
 
@@ -44,11 +44,11 @@ public class WebInfoServiceImpl implements WebInfoService {
 
     @Override
     public InputStreamResource collectResource(DbWebInfo webInfo) throws IOException {
-            File file = new File(webInfo.getName() + ".html");
-            try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(file))){
-                bufferedWriter.write(Jsoup.connect(webInfo.getUrl()).get().html());
-            }
-            return new InputStreamResource(new FileInputStream(file));
-            }
+        File file = new File(webInfo.getName() + ".html");
+        try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(file))) {
+            bufferedWriter.write(Jsoup.connect(webInfo.getUrl()).get().html());
+        }
+        return new InputStreamResource(new FileInputStream(file));
     }
+}
 
